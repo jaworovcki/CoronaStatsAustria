@@ -2,7 +2,7 @@
 
 namespace CoronaStatsAustria.Models
 {
-    public class FederalState
+    public class District
     {
         public int Id { get; set; }
 
@@ -10,6 +10,9 @@ namespace CoronaStatsAustria.Models
         [Required]
         public string Name { get; set; } = string.Empty;
 
-        public List<District> Districts { get; set; } = new();
+        public int Code { get; set; }
+
+        public FederalState State { get; set; } = new();
+
     }
 }
