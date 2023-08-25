@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CoronaStatsAustria.Models
 {
@@ -12,11 +13,14 @@ namespace CoronaStatsAustria.Models
 
         public int Code { get; set; }
 
-        public FederalState State { get; set; } = new();
+        [JsonIgnore]
+        public FederalState State { get; set; } = null!;
 
+        [JsonIgnore]
         public int StateId { get; set; }
 
-        public CovidStats CovidStatistics { get; set; } = new();
+        [JsonIgnore]
+        public CovidStats CovidStatistics { get; set; } = null!;
 
     }
 }
