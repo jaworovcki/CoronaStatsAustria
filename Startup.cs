@@ -1,4 +1,6 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using CoronaStatsAustria.DataAccess;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 namespace CoronaStatsAustria
 {
@@ -18,6 +20,8 @@ namespace CoronaStatsAustria
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CoronaStatsAustria", Version = "v1" });
             });
+            services.AddDbContext<CovidDataContext>(options => options.UseSqlServer(
+                Configuration["ConnectionStrings:DefaultConnection"]));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
