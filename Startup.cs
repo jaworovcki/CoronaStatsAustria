@@ -22,6 +22,7 @@ namespace CoronaStatsAustria
             });
             services.AddDbContext<CovidDataContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]));
+            services.AddHttpClient();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

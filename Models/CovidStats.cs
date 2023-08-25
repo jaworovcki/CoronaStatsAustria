@@ -12,8 +12,6 @@
 
         public int CovidDeathsNumber { get; set; }
 
-        public int SevenDaysIncidence { get; set; }
-
         public District District { get; set; } = null!;
 
         public int DistrictId { get; set; }
