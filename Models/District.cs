@@ -14,6 +14,8 @@ namespace CoronaStatsAustria.Models
 
         public FederalState State { get; set; } = new();
 
+        public int StateId { get; set; }
+
         public CovidStats CovidStatistics { get; set; } = new();
 
     }
