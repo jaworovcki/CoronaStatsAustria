@@ -1,4 +1,5 @@
-﻿using CoronaStatsAustria.DataAccess;
+﻿using CoronaStatsAustria.Controllers;
+using CoronaStatsAustria.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -22,7 +23,7 @@ namespace CoronaStatsAustria
             });
             services.AddDbContext<CovidDataContext>(options => options.UseSqlServer(
                 Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddHttpClient();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

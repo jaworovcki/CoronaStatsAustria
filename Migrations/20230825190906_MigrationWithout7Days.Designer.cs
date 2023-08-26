@@ -4,6 +4,7 @@ using CoronaStatsAustria.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CoronaStatsAustria.Migrations
 {
     [DbContext(typeof(CovidDataContext))]
-    partial class CovidDataContextModelSnapshot : ModelSnapshot
+    [Migration("20230825190906_MigrationWithout7Days")]
+    partial class MigrationWithout7Days
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
