@@ -57,5 +57,7 @@ namespace CoronaStatsAustria.Controllers
 
             return Ok("Data successfully imported");
         }
+
+
     }
 }
