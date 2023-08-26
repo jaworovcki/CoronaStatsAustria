@@ -34,7 +34,7 @@ namespace CoronaStatsAustria.Controllers
                 }))
                 {
                     csv.Context.RegisterClassMap<CovidStatsMap>();
-                    var records = csv.GetRecords<CovidStats>().ToArray();
+                    var records = await Task.Run(csv.GetRecords<CovidStats>().ToArray);
                     foreach (var record in records)
                     {
                         var district = await context.Districts
@@ -49,7 +49,8 @@ namespace CoronaStatsAustria.Controllers
                             return StatusCode(500);
                         }
                     }
-                    context.CovidStatistics.AddRange(records);
+
+                    await context.CovidStatistics.AddRangeAsync(records);
 
                     await context.SaveChangesAsync();
                 }
@@ -58,6 +59,21 @@ namespace CoronaStatsAustria.Controllers
             return Ok("Data successfully imported");
         }
 
+        [HttpGet("states/cases")]
+        public async Task<IEnumerable<CovidStats>> GetTotalCases()
+        {
+            var cases = await context.CovidStatistics
+                .AsNoTracking()
+                .ToArrayAsync();
 
+            if (cases.Any())
+            {
+                return cases;
+            }
+            else
+            {
+                return (IEnumerable<CovidStats>)NotFound("No cases");
+            }
+        }
     }
 }

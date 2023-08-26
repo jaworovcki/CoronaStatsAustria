@@ -1,4 +1,6 @@
-﻿namespace CoronaStatsAustria.Models
+﻿using System.Text.Json.Serialization;
+
+namespace CoronaStatsAustria.Models
 {
     public class CovidStats
     {
@@ -12,8 +14,10 @@
 
         public int CovidDeathsNumber { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public District District { get; set; } = null!;
 
+        [JsonIgnore]
         public int DistrictId { get; set; }
     }
 }

@@ -32,13 +32,24 @@ namespace CoronaStatsAustria.Controllers
         public async Task<IEnumerable<CovidStats>> GetCasesByState(int id)
         {
             var state = await context.States
-                .Include(s => s.Districts)
-                    .ThenInclude(d => d.CovidStatistics)
                 .FirstOrDefaultAsync(s => s.Id == id);
-
+            
             if (state is null)
             {
                 return (IEnumerable<CovidStats>)NotFound();
+            }
+            else
+            {
+                await context.Entry(state)
+                .Collection(s => s.Districts)
+                .LoadAsync();
+
+                foreach (var district in state.Districts)
+                {
+                    await context.Entry(district)
+                        .Reference(d => d.CovidStatistics)
+                        .LoadAsync();
+                }
             }
 
             var cases = state.Districts
